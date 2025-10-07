@@ -1,0 +1,9 @@
+# python 3.13.5
+python-dotenv
+openai-agents
+openai
+langchain
+langchain-openai
+langchain-community
+faiss-cpu
+mcp[cli]
