@@ -45,7 +45,4 @@ if __name__ == "__main__":
     # Example usage
     print("Getting Bitcoin price...")
     btc_price = get_crypto_price('bitcoin')
-    if btc_price:
-        print(f"Bitcoin price: ${btc_price} USD")
-    else:
-        print("Failed to get Bitcoin price")
+    print(btc_price)
