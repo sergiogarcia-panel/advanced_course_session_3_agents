@@ -1,0 +1,9 @@
+# Multi-agentic RAG
+
+1. Execute `python src\build_vector_store.py` to build the vector store.
+2. Transform the function in `src\tools\semantic_search.py` into a tool.
+3. Create a file named `src\main.py` and implement a simple agent that utilizes the semantic search tool to answer questions based on the vector store.
+4. Create a set of questions to test the agent's ability to retrieve and answer based on the vector store. To make sure the agent is taking the information from the vector store, you can modify the documents in `docs` with incorrect information and force the agent through instructions to use the semantic search tool even if the information is incorrect.
+5. Create a multi-agent system: there must be a triage agent that receives the user question and decides whether to answer directly or delegate to a specialist agent (e.g., a math expert, a history expert, etc.) based on the content of the question. Each specialist agent should use the semantic search tool to find relevant information in the vector store before answering.
+6. Try to include an input guardrail to prevent the system from answering questions that are related with Music for example. Note that the input guardrail should be implemented in the triage agent only.
+7. Create an MCP server, include semantic_search as a tool, dockerize it, run it locally using docker and replace the previous tool in the agents with the MCP server. To dockerize the MCP server, you only need to worry about the Dockerfile. Afterwards you can use the `docker-compose.yml` file to run it locally using `docker-compose up --build`. Remember that you must do it in an independent terminal placed in the same directory as the `docker-compose.yml` file.

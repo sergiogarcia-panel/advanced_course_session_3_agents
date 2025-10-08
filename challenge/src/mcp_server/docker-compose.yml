@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../../full_index:/app/full_index:ro  # Mount as read-only
+    env_file:
+      - ../../.env  # Path to your .env file
+    restart: unless-stopped
