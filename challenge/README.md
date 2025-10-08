@@ -1,5 +1,7 @@
 # Multi-agentic RAG
 
+The idea is to create a multi-agent system that uses a vector store to answer questions based on a set of documents. The documents are located in the `docs` folder. They are simple .md files about different topics: math, history, science, etc. The idea is to create a triage agent that receives the user question and decides whether to answer directly or delegate to a specialist agent (e.g., a math expert, a history expert, etc.) based on the content of the question. Each specialist agent should use the semantic search tool to find relevant information in the vector store before answering. To connect the vector store with the agents, you will create an MCP server that exposes the semantic search functionality as a tool.
+
 1. Execute `python src\build_vector_store.py` to build the vector store.
 2. Transform the function in `src\tools\semantic_search.py` into a tool.
 3. Create a file named `src\main.py` and implement a simple agent that utilizes the semantic search tool to answer questions based on the vector store.
