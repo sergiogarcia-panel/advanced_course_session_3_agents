@@ -1,4 +1,4 @@
-from agents import function_tool
+from mcp.server.fastmcp import FastMCP
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from dotenv import load_dotenv
@@ -8,9 +8,16 @@ load_dotenv()
 embedding_model = OpenAIEmbeddings()
 vectorstore = FAISS.load_local("full_index", embedding_model, allow_dangerous_deserialization=True)
 
+# Create an MCP server
+mcp = FastMCP(
+    name="Math Server",
+    host="0.0.0.0",  # only used for SSE transport (localhost)
+    port=8080,  # only used for SSE transport (set this to any port)
+    stateless_http=True,
+)
 
-@function_tool
-async def semantic_search(query: str, category: str, limit: int = 3) -> str:
+@mcp.tool()
+def semantic_search(query: str, category: str, limit: int = 3) -> str:
     """
     Search for relevant documents inside a certain category based on the query.
     
@@ -42,3 +49,8 @@ async def semantic_search(query: str, category: str, limit: int = 3) -> str:
         return formatted_results
     except Exception as e:
         return f"Error searching {category} documents: {str(e)}"
+
+
+# Run the server
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http")

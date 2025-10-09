@@ -1,0 +1,7 @@
+mcp[cli]
+python-dotenv
+openai
+langchain
+langchain-openai
+langchain-community
+faiss-cpu
